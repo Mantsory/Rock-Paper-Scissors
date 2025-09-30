@@ -2,7 +2,7 @@
  * Purpose: to play Rock Paper Scissors with a computer.
  *
  * Author: Mantsory
- * Version: 1.0
+ * Version: 1.1.1
  */
 
 import java.util.Scanner;
@@ -23,52 +23,40 @@ public class RockPaperScissors {
 
         Scanner input = new Scanner(System.in);
 
-        String playerChoice;
-
         String playerInput = input.next();
         String playerInputChar = playerInput.substring(0,1);
         playerInputChar = playerInputChar.toUpperCase();
         String overflow = input.nextLine();
         switch (playerInputChar) {
             case "R":
-                playerChoice = "rock";
-                break;
+                return "rock";
             case "P":
-                playerChoice = "paper";
-                break;
+                return "paper";
             case "S":
-                playerChoice = "scissors";
-                break;
+                return "scissors";
             default:
-                playerChoice = null;
                 System.out.println("You input a improper input. Exiting program...");
                 System.exit(1);
+                return null;
         }
-        return playerChoice;
     } //end of getPlayerChoice
 
     public static String getCompChoice() {
-
-        String compChoice; //this will be the computers choice
 
         //Determines the computers choice
         int randInt = (int) (Math.random() * 3) + 1;
         switch (randInt) {
             case 1:
-                compChoice = "rock";
-                break;
+                return "rock";
             case 2:
-                compChoice = "paper";
-                break;
+                return "paper";
             case 3:
-                compChoice = "scissors";
-                break;
+                return "scissors";
             default:
-                compChoice = null;
                 error();
+                return null;
 
         }
-        return compChoice;
     }//end of getCompChoice
 
     public static String getGameResult(String choice, String compChoice) {
@@ -81,56 +69,43 @@ public class RockPaperScissors {
             case "rock":
                 switch (compChoice) {
                     case "rock":
-                        gameResult = TIE_MSG;
-                        break;
+                        return TIE_MSG;
                     case "paper":
-                        gameResult = LOS_MSG;
-                        break;
+                        return LOS_MSG;
                     case "scissors":
-                        gameResult = WIN_MSG;
-                        break;
+                        return WIN_MSG;
                     default:
-                        gameResult = null;
                         error();
+                        return null;
                 }
-            break;
             case "paper":
                 switch (compChoice) {
                     case "rock":
-                        gameResult = WIN_MSG;
-                        break;
+                        return WIN_MSG;
                     case "paper":
-                        gameResult = TIE_MSG;
-                        break;
+                        return TIE_MSG;
                     case "scissors":
-                        gameResult = LOS_MSG;
-                        break;
+                        return LOS_MSG;
                     default:
-                        gameResult = null;
                         error();
+                        return null;
                 }
-            break;
             case "scissors":
                 switch (compChoice) {
                     case "rock":
-                        gameResult = LOS_MSG;
-                        break;
+                        return LOS_MSG;
                     case "paper":
-                        gameResult = WIN_MSG;
-                        break;
+                        return WIN_MSG;
                     case "scissors":
-                        gameResult = TIE_MSG;
-                        break;
+                        return TIE_MSG;
                     default:
-                        gameResult = null;
                         error();
+                        return null;
                 }
-            break;
             default:
-                gameResult = null;
                 error();
+                return null;
         }
-        return gameResult;
     } //end of getGameResult
 
 
@@ -141,7 +116,7 @@ public class RockPaperScissors {
         boolean gameActive = true;
         while (gameActive){
             System.out.println("Welcome to Rock Paper Scissors!");
-            System.out.println("Please type in 'R', 'P', or 'S' to play.\n");
+            System.out.println("Please type in '[R]ock', '[P]aper', or '[S]cissors' to play.\n");
 
             String choice = getPlayerChoice();
             String compChoice = getCompChoice();
@@ -156,7 +131,8 @@ public class RockPaperScissors {
             String again = input.next();
             String overflow = input.nextLine(); //removes any extra text
 
-            if (again.equalsIgnoreCase("yes")) {
+            String againChar = again.substring(0,1);
+            if (againChar.equalsIgnoreCase("y")) {
                 System.out.println("PLaying again!");
             }
             else {
